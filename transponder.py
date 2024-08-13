@@ -9,7 +9,7 @@ transCode = ""
 # index the generator codes as to not regenerate
 generatedCodes = []
 # ICAO emergency codes
-forbiddenCodes = [7500, 7600, 7700]
+forbiddenCodes = ["7500", "7600", "7700"]
 
 def generateCode():
     transCode = ""
@@ -19,3 +19,21 @@ def generateCode():
     if transCode not in generatedCodes or transCode not in forbiddenCodes:
         generatedCodes.append(transCode)
         return transCode
+    
+@app.route('/')
+def index():
+    flaskCode = generateCode()
+    return render_template_string('''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transponder code generator</title>
+</head>
+<body>
+    <h1>Transponder code:</h1>
+    <p>{{ code }}</p>                 
+</body>
+</html>
+''', code = flaskCode)
