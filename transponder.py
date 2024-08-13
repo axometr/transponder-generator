@@ -16,11 +16,11 @@ def generateCode():
     for _ in range(0,4):
         randDigit = random.choice(digits)
         transCode += randDigit
-    if transCode not in generatedCodes or transCode not in forbiddenCodes:
+    if transCode not in generatedCodes and transCode not in forbiddenCodes:
         generatedCodes.append(transCode)
         return transCode
     
-@app.route('/')
+@app.route("/")
 def index():
     flaskCode = generateCode()
     return render_template_string('''
@@ -33,10 +33,24 @@ def index():
 </head>
 <body>
     <h1>Transponder code:</h1>
-    <p>{{ code }}</p>
-    <form action="/" method="get">
-        <button type="submit">Generate New Code</button>
-    </form>              
+    <p id="transponder-code-p">{{ code }}</p>
+    <button id="regenerate-button">Generate New Code</button>
+    <script>
+        document.getElementById("regenerate-button").addEventListener("click", function() {
+            fetch("/regenerate").then(response => response.text())
+            .then(code => {
+                document.getElementById("transponder-code-p").textContent = code;
+            });
+        });
+    </script>
 </body>
 </html>
 ''', code = flaskCode)
+
+# if we get a request via the Flask button, then call the generate function again and return its output
+@app.route("/regenerate")
+def regenerateCode():
+    return(generateCode())
+
+if __name__ == '__main__':
+    app.run(debug=True)
