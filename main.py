@@ -8,7 +8,12 @@ generatedCodes = []
 # ICAO emergency codes
 forbiddenCodes = [7500, 7600, 7700]
 
-
-for i in range(0,4):
-    randDigit = random.choice(digits)
-    transCode += randDigit
+while True:
+    for i in range(0,4):
+        randDigit = random.choice(digits)
+        transCode += randDigit
+    if transCode not in generatedCodes or transCode not in forbiddenCodes:
+        generatedCodes.append(transCode)
+        print(transCode)
+        transCode = ""
+        input()
