@@ -33,19 +33,37 @@ def index():
     <style>
         html {
             font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 130%
+            font-size: 300%;
+            text-align: center;
+            line-height: 50%;
+            margin-top: 30vh;
         }
 
         .transponder-code-p {
             font-size: 150%;
             font-weight: bold;
         }
+                                  
+        .button {
+            background-color: #eb4034;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+                                  
+        .button:hover {
+            background-color: #c22217;
+        }
     </style>
 </head>
 <body>
     <div>Transponder code:</div>
     <p class="transponder-code-p" id="transponder-code-p">{{ code }}</p>
-    <button id="regenerate-button">Generate New Code</button>
+    <button class="button" id="regenerate-button">Generate New Code</button>
     <script>
         document.getElementById("regenerate-button").addEventListener("click", function() {
             fetch("/regenerate").then(response => response.text())
