@@ -30,10 +30,21 @@ def index():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transponder code generator</title>
+    <style>
+        html {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 130%
+        }
+
+        .transponder-code-p {
+            font-size: 150%;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Transponder code:</h1>
-    <p id="transponder-code-p">{{ code }}</p>
+    <div>Transponder code:</div>
+    <p class="transponder-code-p" id="transponder-code-p">{{ code }}</p>
     <button id="regenerate-button">Generate New Code</button>
     <script>
         document.getElementById("regenerate-button").addEventListener("click", function() {
