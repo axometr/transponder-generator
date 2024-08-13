@@ -33,7 +33,10 @@ def index():
 </head>
 <body>
     <h1>Transponder code:</h1>
-    <p>{{ code }}</p>                 
+    <p>{{ code }}</p>
+    <form action="/" method="get">
+        <button type="submit">Generate New Code</button>
+    </form>              
 </body>
 </html>
 ''', code = flaskCode)
