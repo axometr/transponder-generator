@@ -11,14 +11,20 @@ generatedCodes = []
 # ICAO emergency codes
 forbiddenCodes = ["7500", "7600", "7700"]
 
-def generateCode():
+def rawCode():
     transCode = ""
-    for _ in range(0,4):
+    for _ in range(4):
         randDigit = random.choice(digits)
         transCode += randDigit
-    if transCode not in generatedCodes and transCode not in forbiddenCodes:
-        generatedCodes.append(transCode)
-        return transCode
+    return transCode
+
+def generateCode():
+    while True:
+        transCode = rawCode()
+        if transCode not in generatedCodes and transCode not in forbiddenCodes:
+            generatedCodes.append(transCode)
+            return transCode
+    
     
 @app.route("/")
 def index():
