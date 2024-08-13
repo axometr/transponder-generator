@@ -53,6 +53,7 @@ def index():
             font-size: 16px;
             border: none;
             cursor: pointer;
+            border-radius: 10px;
         }
                                   
         .button:hover {
